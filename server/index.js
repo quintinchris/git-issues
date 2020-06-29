@@ -18,11 +18,21 @@ var jsonParser = bodyParser.json();
 //app.use(bodyParser.raw());
 //app.use(express.json())
 
-app.get('/', (req, res) => res.send('Hello World!'));
 
-app.post('/', function (req, res) {
+app.get('/', (req, res) => {
+    res.send('Hello World');
+});
+
+app.post('/', (req, res) => {
     console.log(req.body);
-    /*
+});
+
+//app.get('/', (req, res) => res.send('Hello World!'));
+
+/*
+app.post('/', function (req, res) {
+    console.log(res.body);
+    
     client.messages
         .create({
             body: `${req.body}`, //`${repo.issue}`
@@ -30,7 +40,9 @@ app.post('/', function (req, res) {
             to: 16072427828 //`${user.number}`
         })
         .then(message => console.log(message.sid));
-        */
+        
 });
+
+*/
 
 app.listen(process.env.PORT, () => console.log(`Listening at http://localhost:${process.env.PORT}`));

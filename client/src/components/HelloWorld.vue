@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <input type="text" placeholder="Enter your text here" v-model='message' value='message'/>
+    <input id="message" type="text" placeholder="Enter your text here" v-model="message"/>
     <a v-on:click="sendSMS(message)">
       <i class="btn far fa-arrow-alt-circle-up"></i>
     </a>
@@ -13,28 +13,30 @@ const API_URL = 'http://localhost:8080/';
 export default {
   name: 'HelloWorld',
   data() {
-    return {
-    };
+    '';
+
+    return {};
   },
   mounted() {
 
   },
   methods: {
-    sendSMS(text) {
+    sendSMS(message) {
       // eslint-disable-next-line no-console
-      console.log(text);
+      console.log(message);
       fetch(API_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(text),
+        body: JSON.stringify({
+          msg: this.message,
+        }),
       }).then(response => response.json())
         .then((result) => {
           if (result.details) {
             const error = result.details
-              .map(detail => detail.message)
-              .join('.');
+              .map(detail => detail.message);
             this.error = error;
           } else {
             this.error = '';
