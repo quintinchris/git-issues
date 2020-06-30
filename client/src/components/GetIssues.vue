@@ -34,43 +34,36 @@ export default {
   },
   methods: {
     getIssues(label) {
-      const searchIssues = `${githubAPI}/search/issues/?q=`;
-      const labels = 'label=';
+      const searchIssues = `${githubAPI}/search/issues?q=`;
+      const labels = 'label:';
       const gfi = 'good-first-issue';
       const enhancement = 'enhancement';
       const hw = 'help-wanted';
+      let searchString = '';
 
       // console.log(label);
       if (label === 'good-first-issue') {
-        const searchString = searchIssues.concat(gfi);
-        console.log(searchString);
+        searchString = searchIssues.concat(labels).concat(gfi);
+        // console.log(searchString);
       } else if (label === 'help-wanted') {
-        const searchString = searchIssues.concat(hw);
-        console.log(searchString);
+        searchString = searchIssues.concat(labels).concat(hw);
+        // console.log(searchString);
       } else if (label === 'enhancement') {
-        const searchString = searchIssues.concat(enhancement);
-        console.log(searchString);
+        searchString = searchIssues.concat(labels).concat(enhancement);
+        // console.log(searchString);
       }
 
 
-      /*
-      fetch(githubAPI, {
+      fetch(searchString, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: '',
       }).then(response => response.json())
-        .then((result) => {
-          if (result.details) {
-            const error = result.details
-              .map(detail => detail.body);
-            this.error = error;
-          } else {
-            this.error = '';
-          }
-        });
-*/
+        .then((data) => {
+          console.log(data);
+        })
+        .catch(error => console.error(error));
     },
   },
 };
