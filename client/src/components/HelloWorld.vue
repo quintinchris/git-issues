@@ -30,7 +30,7 @@ export default {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          msg: this.message,
+          message: this.message,
         }),
       }).then(response => response.json())
         .then((result) => {
